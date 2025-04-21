@@ -14,12 +14,20 @@ public class TestConnect : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        print("connected to server");
-        print(PhotonNetwork.LocalPlayer.NickName);
+        Debug.Log("connected to master", this);
+        Debug.Log("my nickname is " + PhotonNetwork.LocalPlayer.NickName,this);
+        if (!PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        print("Disconnected to server for " + cause.ToString());
+        Debug.Log("Disconnected to server for " + cause.ToString());
+    }
+    public override void OnJoinedLobby()
+    {
+        print("joined lobby");
     }
 }

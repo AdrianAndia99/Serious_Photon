@@ -1,14 +1,41 @@
 using UnityEngine;
 using Photon.Realtime;
 using TMPro;
-public class PlayerListing : MonoBehaviour
+using Photon.Pun;
+using ExitGames.Client.Photon;
+public class PlayerListing : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TextMeshProUGUI roomNameText;
 
     public Player Player { get; private set; }
+    public bool Ready = false;
+
     public void SetPlayerInfo(Player player)
     {
         Player = player;
-        roomNameText.text = player.NickName;
+        SetPlayerText(player);
+    }
+
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+
+        if(targetPlayer!=null && targetPlayer == Player)
+        {
+            if(changedProps.ContainsKey("RandomNumber"))
+            {
+                SetPlayerText(targetPlayer);
+            }
+        }
+    }
+
+    private void SetPlayerText(Player player)
+    {
+        int result = -1;
+        if (player.CustomProperties.ContainsKey("RandomNumber"))
+
+            result = (int)player.CustomProperties["RandomNumber"];
+        roomNameText.text = result.ToString() + ", " + player.NickName;
     }
 }

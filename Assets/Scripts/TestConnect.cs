@@ -7,6 +7,7 @@ public class TestConnect : MonoBehaviourPunCallbacks
     private void Start()
     {
         print("Connecting to server...");
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = MasterManager.GameSettings.NickName;
         PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
         PhotonNetwork.ConnectUsingSettings();
@@ -16,11 +17,10 @@ public class TestConnect : MonoBehaviourPunCallbacks
     {
         Debug.Log("connected to master", this);
         Debug.Log("my nickname is " + PhotonNetwork.LocalPlayer.NickName,this);
-        /*if (!PhotonNetwork.InLobby)
+        if(!PhotonNetwork.InLobby)
         {
             PhotonNetwork.JoinLobby();
-        }*/
-        PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)

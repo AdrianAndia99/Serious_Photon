@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: MasterManager
   m_EditorClassIdentifier: 
   _gameSettings: {fileID: 11400000, guid: dc86087d348a7e345bbf7374c407f45c, type: 2}
+  _networkedPrefabs: []

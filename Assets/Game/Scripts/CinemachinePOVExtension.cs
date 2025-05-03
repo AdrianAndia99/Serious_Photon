@@ -1,7 +1,7 @@
+using Unity.Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Cinemachine;
 
 public class CinemachinePOVExtension : CinemachineExtension {
   [SerializeField] private float clampAngle = 80f;
